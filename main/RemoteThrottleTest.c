@@ -24,10 +24,12 @@ static uint8_t raw_scan_rsp_data[] = {
     0x13, 0x09, 0x42, 0x6F, 0x6F, 0x73, 0x74, 0x65, 0x64, 0x52, 0x6D, 0x74, 0x39, 0x39, 0x41, 0x46, 0x31, 0x31, 0x43, 0x36, // Length 20, DATA_TYPE_LOCAL_NAME_COMPLETE
 };
 
+// Function to create rawThrottleLevel from throttle percent (-100 to +100)
 uint32_t makeRawThrottleLevel(int throttleValPercent) {
     // Clamp percent to -100 .. +100
     if (throttleValPercent > 100) throttleValPercent = 100;
     if (throttleValPercent < -100) throttleValPercent = -100;
+    if (throttleValPercent < 10 && throttleValPercent > -10) throttleValPercent = 0;
 
     // Reverse percent to value
     int throttleVal = (int)((throttleValPercent / 100.0) * 384);
@@ -698,18 +700,18 @@ static void gatts_profile_controls_event_handler(esp_gatts_cb_event_t event, esp
 {
     //Read ADC Values and convert to mapped throttle + percentage
     int adc_value = adc1_get_raw(ADC1_CHANNEL_0);
-    int adc_mapped = adc_value * 768 / 4095 - 384;
-    printf("ADC Value: %d", adc_mapped);
-    printf("\n");
-    int adc_percent = (adc_mapped * 100) / 384;
-    printf("ADC Percent: %d", adc_percent);
-    printf("\n");
+    int throttle_mapped = adc_value * 768 / 4095 - 384;
+    int throttle_percent = (throttle_mapped * 100) / 384;
 
-    int raw = makeRawThrottleLevel(adc_percent);
+    // Convert percentage to raw throttle value
+    uint32_t rawThrottle = makeRawThrottleLevel(throttle_percent);
 
-    printf(" -> rawThrottleLevel: 0x%08X\n", raw);
-    printf("\n");
-
+    /**
+    //Output throttle values to console for testing
+    printf("ADC Value: %d\n", throttle_mapped);
+    printf("ADC Percent: %d\n", throttle_percent);
+    printf("Raw Throttle Value: 0x%lX\n", rawThrottle);
+    **/
     switch (event)
     {
     case ESP_GATTS_REG_EVT:
@@ -796,8 +798,12 @@ static void gatts_profile_controls_event_handler(esp_gatts_cb_event_t event, esp
         if (descr_value == 0x0001)
         {
             ESP_LOGI(GATTS_TAG, "notify enable");
-            // Data to be sent in the indication
-            uint8_t indication_data[] = {0x00, 0x00, 0x02, 0x00}; // Replace with your data
+            // Throttle data to be sent in the indication. Throttle data is sent in big-endian format
+            uint8_t indication_data[4];
+            indication_data[0] = (rawThrottle >> 24) & 0xFF;
+            indication_data[1] = (rawThrottle >> 16) & 0xFF;
+            indication_data[2] = (rawThrottle >> 8) & 0xFF;
+            indication_data[3] = (rawThrottle >> 0) & 0xFF;
 
             // Send an indication
             esp_err_t indicate_ret = esp_ble_gatts_send_indicate(
@@ -822,8 +828,12 @@ static void gatts_profile_controls_event_handler(esp_gatts_cb_event_t event, esp
         {
             esp_log_buffer_hex(GATTS_TAG, param->conf.value, param->conf.len);
         }
-        // Data to be sent in the indication
-        uint8_t indication_data[] = {0x00, 0x00, 0x02, 0x00}; // Replace with your data
+            // Throttle data to be sent in the indication. Throttle data is sent in big-endian format
+            uint8_t indication_data[4];
+            indication_data[0] = (rawThrottle >> 24) & 0xFF;
+            indication_data[1] = (rawThrottle >> 16) & 0xFF;
+            indication_data[2] = (rawThrottle >> 8) & 0xFF;
+            indication_data[3] = (rawThrottle >> 0) & 0xFF;
 
         // Send an indication
         esp_err_t indicate_ret = esp_ble_gatts_send_indicate(
