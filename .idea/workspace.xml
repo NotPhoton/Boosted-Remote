@@ -159,17 +159,61 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7a18dbb4-d437-4e87-b28a-46f925137b2d" name="Changes" comment="Initial Commit" />
+    <list default="true" id="7a18dbb4-d437-4e87-b28a-46f925137b2d" name="Changes" comment="getting ADC data">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/.cmake/api/v1/reply/cache-v2-b5cd0378ef8c0f1a4abf.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/.cmake/api/v1/reply/cmakeFiles-v1-5b5187e2881417b90040.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/.cmake/api/v1/reply/target-bootloader-Debug-0afc4f85adda6fda410c.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/clion-idf-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/clion-idf-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/git-data/HEAD" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/git-data/HEAD" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/git-data/head-ref" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/git-data/head-ref" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/CMakeFiles/rules.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/build/CMakeFiles/rules.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/bootloader-prefix/tmp/bootloader-cfgcmd.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/bootloader-prefix/tmp/bootloader-cfgcmd.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/build.ninja" beforeDir="false" afterPath="$PROJECT_DIR$/build/build.ninja" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/compile_commands.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/compile_commands.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/project_description.json" beforeDir="false" afterPath="$PROJECT_DIR$/build/project_description.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/RemoteThrottleTest.c" beforeDir="false" afterPath="$PROJECT_DIR$/main/RemoteThrottleTest.c" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="repository" />
+    </option>
+  </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="EmbeddedSvdWindowState">
+    <option name="columnWidths">
+      <list>
+        <option value="212" />
+        <option value="92" />
+        <option value="3006" />
+      </list>
+    </option>
+    <option name="columnOrder">
+      <list>
+        <option value="Name" />
+        <option value="Value" />
+        <option value="Description" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory"><![CDATA[{
   "lastFilter": {
@@ -232,8 +276,8 @@
       <window_info id="Backup and Sync History" />
       <window_info id="Commit_Guest" show_stripe_button="false" />
       <window_info id="Learn" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.18415698" />
-      <window_info active="true" id="Commit" order="1" visible="true" weight="0.18415698" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18415698" />
+      <window_info id="Commit" order="1" weight="0.18415698" />
       <window_info active="true" id="Structure" order="2" side_tool="true" visible="true" weight="0.18415698" />
       <window_info id="Pull Requests" order="3" weight="0.18415698" />
       <window_info anchor="bottom" id="Database Changes" />
@@ -250,17 +294,17 @@
       <window_info anchor="bottom" id="Services" order="4" weight="0.24756944" />
       <window_info anchor="bottom" id="CMake" order="5" weight="0.24756944" />
       <window_info anchor="bottom" id="Run" order="6" weight="0.24756944" />
-      <window_info active="true" anchor="bottom" id="Debug" order="7" visible="true" weight="0.24756944" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.24756944" />
       <window_info anchor="right" id="make" side_tool="true" />
       <window_info anchor="right" id="Python Console" />
       <window_info anchor="right" id="Coverage" side_tool="true" />
-      <window_info anchor="right" content_ui="combo" id="Notifications" order="0" weight="0.25" />
+      <window_info anchor="right" id="Notifications" order="0" weight="0.3300872" />
       <window_info anchor="right" id="AIAssistant" order="1" weight="0.25" />
       <window_info anchor="right" id="Database" order="2" weight="0.25" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.25" />
       <window_info anchor="right" id="Maven" order="4" weight="0.25" />
       <window_info anchor="right" id="Meson" order="5" />
-      <window_info anchor="right" id="ESP-IDF" order="7" weight="0.3300872" />
+      <window_info active="true" anchor="right" id="ESP-IDF" order="7" visible="true" weight="0.3300872" />
     </layout>
   </component>
   <component name="RunManager" selected="ESP-IDF.ESP-IDF Debug">
@@ -1093,7 +1137,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1756343951261</updated>
-      <workItem from="1756343952264" duration="2456000" />
+      <workItem from="1756343952264" duration="5058000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <option name="closed" value="true" />
@@ -1111,7 +1155,31 @@
       <option name="project" value="LOCAL" />
       <updated>1756346411263</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added Files">
+      <option name="closed" value="true" />
+      <created>1756346501312</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1756346501312</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added .gitignore">
+      <option name="closed" value="true" />
+      <created>1756346669536</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1756346669536</updated>
+    </task>
+    <task id="LOCAL-00005" summary="getting ADC data">
+      <option name="closed" value="true" />
+      <created>1756347042212</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1756347042212</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1141,7 +1209,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
+    <MESSAGE value="Added Files" />
+    <MESSAGE value="Added .gitignore" />
+    <MESSAGE value="getting ADC data" />
+    <option name="LAST_COMMIT_MESSAGE" value="getting ADC data" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

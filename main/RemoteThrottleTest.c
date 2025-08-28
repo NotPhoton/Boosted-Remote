@@ -761,7 +761,7 @@ static void gatts_profile_controls_event_handler(esp_gatts_cb_event_t event, esp
         {
             ESP_LOGI(GATTS_TAG, "notify enable");
             // Data to be sent in the indication
-            uint8_t indication_data[] = {0x03, 0x14, 0x02, 0x00}; // Replace with your data
+            uint8_t indication_data[] = {0x00, 0x00, 0x02, 0x00}; // Replace with your data
 
             // Send an indication
             esp_err_t indicate_ret = esp_ble_gatts_send_indicate(
@@ -781,12 +781,21 @@ static void gatts_profile_controls_event_handler(esp_gatts_cb_event_t event, esp
         break;
     case ESP_GATTS_CONF_EVT:
         ESP_LOGI(GATTS_TAG, "ESP_GATTS_CONF_EVT, status %d attr_handle %d", param->conf.status, param->conf.handle);
+
+        printf("\n");
+        int adc_value = adc1_get_raw(ADC1_CHANNEL_0);
+        int adc_mapped = adc_value * 768 / 4095 - 384;
+        printf("ADC Value: %d", adc_mapped);
+        int adc_percent = (adc_mapped * 100) / 384;
+        printf("ADC Percent: %d", adc_percent);
+        printf("\n");
+
         if (param->conf.status != ESP_GATT_OK)
         {
             esp_log_buffer_hex(GATTS_TAG, param->conf.value, param->conf.len);
         }
         // Data to be sent in the indication
-        uint8_t indication_data[] = {0x03, 0x14, 0x02, 0x00}; // Replace with your data
+        uint8_t indication_data[] = {0x00, 0x00, 0x02, 0x00}; // Replace with your data
 
         // Send an indication
         esp_err_t indicate_ret = esp_ble_gatts_send_indicate(
