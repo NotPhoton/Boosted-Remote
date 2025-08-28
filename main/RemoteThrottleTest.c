@@ -2,8 +2,13 @@
 #include "freertos/task.h"
 #include "freertos/event_groups.h"
 #include "sdkconfig.h"
-
+#include <stdint.h>
+#include "driver/adc.h"
+#include "esp_adc_cal.h"
 #include "RemoteThrottleTest.h"
+
+// ADC calibration characteristics
+static esp_adc_cal_characteristics_t adc1_chars;
 
 static uint8_t adv_config_done = 0;
 #define adv_config_flag (1 << 0)
@@ -1142,6 +1147,11 @@ void app_main()
     esp_log_level_set("*", ESP_LOG_VERBOSE);
 
     esp_err_t ret;
+
+    // Initialize ADC
+    esp_adc_cal_characterize(ADC_UNIT_1, ADC_ATTEN_DB_12, ADC_WIDTH_BIT_DEFAULT, 0, &adc1_chars);
+    adc1_config_width(ADC_WIDTH_BIT_DEFAULT);
+    adc1_config_channel_atten(ADC1_CHANNEL_0, ADC_ATTEN_DB_12);
 
     // Initialize NVS.
     ret = nvs_flash_init();
