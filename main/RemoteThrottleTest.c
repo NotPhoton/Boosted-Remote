@@ -24,6 +24,28 @@ static uint8_t raw_scan_rsp_data[] = {
     0x13, 0x09, 0x42, 0x6F, 0x6F, 0x73, 0x74, 0x65, 0x64, 0x52, 0x6D, 0x74, 0x39, 0x39, 0x41, 0x46, 0x31, 0x31, 0x43, 0x36, // Length 20, DATA_TYPE_LOCAL_NAME_COMPLETE
 };
 
+uint32_t makeRawThrottleLevel(int throttleValPercent) {
+    // Clamp percent to -100 .. +100
+    if (throttleValPercent > 100) throttleValPercent = 100;
+    if (throttleValPercent < -100) throttleValPercent = -100;
+
+    // Reverse percent to value
+    int throttleVal = (int)((throttleValPercent / 100.0) * 384);
+
+    // Map back to unscaled
+    uint32_t throttleValUnscaled = (uint32_t)(throttleVal + 128 + 384);
+
+    // Compose the 32-bit rawThrottleLevel
+    uint32_t rawThrottleLevel = 0;
+    // Insert throttleValUnscaled into bits 16-31
+    rawThrottleLevel |= (throttleValUnscaled << 16);
+    // Set triggerEnabled (bit 9)
+    rawThrottleLevel |= (1 << 9);
+    // Button enabled (bit 8) stays 0
+
+    return rawThrottleLevel;
+}
+
 // Define otau char values
 static uint8_t otau_char1_val[] = {0x01};
 static esp_attr_value_t otau_char1_profile = {
@@ -674,6 +696,20 @@ static void gatts_profile_otau_event_handler(esp_gatts_cb_event_t event, esp_gat
 
 static void gatts_profile_controls_event_handler(esp_gatts_cb_event_t event, esp_gatt_if_t gatts_if, esp_ble_gatts_cb_param_t *param)
 {
+    //Read ADC Values and convert to mapped throttle + percentage
+    int adc_value = adc1_get_raw(ADC1_CHANNEL_0);
+    int adc_mapped = adc_value * 768 / 4095 - 384;
+    printf("ADC Value: %d", adc_mapped);
+    printf("\n");
+    int adc_percent = (adc_mapped * 100) / 384;
+    printf("ADC Percent: %d", adc_percent);
+    printf("\n");
+
+    int raw = makeRawThrottleLevel(adc_percent);
+
+    printf(" -> rawThrottleLevel: 0x%08X\n", raw);
+    printf("\n");
+
     switch (event)
     {
     case ESP_GATTS_REG_EVT:
@@ -781,14 +817,6 @@ static void gatts_profile_controls_event_handler(esp_gatts_cb_event_t event, esp
         break;
     case ESP_GATTS_CONF_EVT:
         ESP_LOGI(GATTS_TAG, "ESP_GATTS_CONF_EVT, status %d attr_handle %d", param->conf.status, param->conf.handle);
-
-        printf("\n");
-        int adc_value = adc1_get_raw(ADC1_CHANNEL_0);
-        int adc_mapped = adc_value * 768 / 4095 - 384;
-        printf("ADC Value: %d", adc_mapped);
-        int adc_percent = (adc_mapped * 100) / 384;
-        printf("ADC Percent: %d", adc_percent);
-        printf("\n");
 
         if (param->conf.status != ESP_GATT_OK)
         {
