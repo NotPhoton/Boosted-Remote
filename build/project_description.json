@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "RemoteThrottleTest",
-    "project_version":    "2a23112",
+    "project_version":    "bb0a3cd-dirty",
     "project_path":       "/mnt/c/Users/Bradyn/Desktop/RemoteThrottleTest",
     "idf_path":           "/home/bradyn/esp/esp-idf",
     "build_dir":          "/mnt/c/Users/Bradyn/Desktop/RemoteThrottleTest/build",

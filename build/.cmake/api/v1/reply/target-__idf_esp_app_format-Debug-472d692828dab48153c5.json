@@ -215,7 +215,7 @@
 				},
 				{
 					"backtrace" : 10,
-					"define" : "PROJECT_VER=\"2a23112\""
+					"define" : "PROJECT_VER=\"bb0a3cd-dirty\""
 				},
 				{
 					"backtrace" : 2,
