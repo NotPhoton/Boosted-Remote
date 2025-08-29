@@ -29,6 +29,7 @@ uint32_t makeRawThrottleLevel(int throttleValPercent) {
     // Clamp percent to -100 .. +100
     if (throttleValPercent > 100) throttleValPercent = 100;
     if (throttleValPercent < -100) throttleValPercent = -100;
+    // Center deadzone for the joystick
     if (throttleValPercent < 10 && throttleValPercent > -10) throttleValPercent = 0;
 
     // Reverse percent to value
